@@ -105,3 +105,22 @@ class Team:
         pass
 
 
+"""
+A unit test would be to test weekly offensive production over 2 weeks        
+"""
+
+def test_cumulative_seasonal_production_over_two_weeks(self):
+    """
+    Test the cumulative seasonal production over two weeks
+    """
+    #Game 1
+    self.team.weekly_calculate_offensive_production(35, 20)
+    self.team.weekly_calculate_defensive_production(15, 25)
+    
+    #Game 2
+    self.team.weekly_calculate_offensive_production(16, 22)
+    self.team.weekly_calculate_defensive_production(31, 9)
+    
+    # Check cumulative seasonal performance
+    cumulative_season_performance = self.team.cumulative_seasonal_production()
+    expected_cumulative_performance = sum(self.team.total_offense) + sum(self.team.total_defense)
