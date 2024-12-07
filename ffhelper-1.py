@@ -17,13 +17,13 @@ class Team:
         #offense stats
         self.games_played = offense_stats.get("GP", 0)
         self.points_per_game = offense_stats.get("PTS", 0)
-        self.o = offense_stats.get("All", 0)
+        self.off = offense_stats.get("All", 0)
         self.plays_per_game = offense_stats.get("Run", 0) + offense_stats.get("Pass", 0)
-        self.team_efficiency = self.o / self.plays_per_game
+        self.team_efficiency = self.off / self.plays_per_game
 
         #defense stats
         self.points_allowed_per_game = defense_stats.get("PA", 0)
-        self.d = defense_stats.get("DEF", 0)
+        self.de = defense_stats.get("DEF", 0)
         self.offensive_production_allowed = defense_stats.get("QB", 0) + defense_stats.get("RB", 0) + defense_stats.get("WR", 0) + defense_stats.get("TE", 0)
         
         # stats to calculate expected wins and losses
@@ -46,9 +46,9 @@ class Team:
         Calculate the expected wins for each team based on offensive and defensive production
         """
         # Calculate Expected Points on offense per game
-        self.x_off = 0.19 * (self.o) + 12
+        self.x_off = 0.19 * (self.off) + 12
         # Calculate Expected Points allowed on defense per game
-        self.x_def = -1.24 * (self.d) + 30.8
+        self.x_def = -1.24 * (self.de) + 30.8
         # Calculate Net Rating
         self.net = self.x_off - self.x_def
         # Calculate expected wins
@@ -66,15 +66,15 @@ class Team:
         """
         Calculate the team's net production using an original formula
         """
-        return round(self.o + self.d * 7.06)
+        return round(self.off + self.de * 7.06)
 
     def __repr__(self):
         """
         Return a string representation of the team's data
         """
         return (f"Team: {self.name}, Games Played: {self.games_played}\n"
-                f"Offense - Points Per Game: {self.points_per_game}, Total Offensive Production: {self.o}, Plays Per Game: {self.plays_per_game}, Team Efficiency: {round(self.team_efficiency, 3)}\n"
-                f"Defense - Points Allowed Per Game: {self.points_allowed_per_game}, Total Defensive Production: {self.d}, Offensive Production Allowed to Opponents: {round(self.offensive_production_allowed, 2)}\n"
+                f"Offense - Points Per Game: {self.points_per_game}, Total Offensive Production: {self.off}, Plays Per Game: {self.plays_per_game}, Team Efficiency: {round(self.team_efficiency, 3)}\n"
+                f"Defense - Points Allowed Per Game: {self.points_allowed_per_game}, Total Defensive Production: {self.de}, Offensive Production Allowed to Opponents: {round(self.offensive_production_allowed, 2)}\n"
                 f"Offense - Expected Points Per Game: {round(self.x_off, 2)}\n"
                 f"Defense - Expected Points Allowed Per Game: {round(self.x_def, 2)}\n"
                 f"Net Production: {self.calculate_net_production()}, Expected Net Rating: {round(self.net, 2)}")
@@ -211,8 +211,17 @@ if __name__ == "__main__":
     schedule_file = "2023 Schedule.csv"
 
     # Gives user option for method of calculating team records
-    print('Would you like to do the season simulation,\nor would you like to find the expected records of each team?\nFor the simulation, type "simulation",\nand to find the expected records, type "expect".')
+    print('Would you like to do the season simulation,\nor would you like to find the expected records of each team,\nor would you like to view individual team stats?\n\nFor the simulation, type "simulation",\nand to find the expected records, type "expect",\nand to view team stats, type "stats".')
     choice = input()
+    
+    if choice.casefold() == "stats":
+        #create the teams
+        teams = create_teams(offense_file, defense_file)
+        
+        #print individual team stats
+        for team_name, team in teams.items():
+            print(team)
+            print("")
     
     if choice.casefold() == "simulation":
     
@@ -222,29 +231,21 @@ if __name__ == "__main__":
         #simulate the season
         season_results = simulate_season(schedule_file, teams)
         
-        #print individual team stats
-        for team_name, team in teams.items():
-            print(team)
-            print("")
-
         #print the results of each matchup
         print("\nGame Results:")
         for result in season_results:
             print(result)
 
         #print final team records
-        print("\nFinal Team Records:")
+        print("\nFinal Regular Season Team Records:")
         print_team_records(teams)
+        print("\n")
+        
     
     if choice.casefold() == "expect":
 
         #create the teams
         teams = create_teams(offense_file, defense_file)
-
-        #print individual team stats
-        for team_name, team in teams.items():
-            print(team)
-            print("")
         
         #print final team records
         print("\nFinal Team Records:")
