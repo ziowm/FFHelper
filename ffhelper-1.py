@@ -191,8 +191,48 @@ def print_team_records(teams):
 
     teams: dict containing Team instances
     """
-    for team_name, team in teams.items():
+
+    #define the AFC teams
+    afc_teams = {
+        "Baltimore Ravens", "Buffalo Bills", "Cincinnati Bengals", "Cleveland Browns", 
+        "Denver Broncos", "Houston Texans", "Indianapolis Colts", "Jacksonville Jaguars", 
+        "Kansas City Chiefs", "Las Vegas Raiders", "Los Angeles Chargers", "Miami Dolphins", 
+        "New England Patriots", "New York Jets", "Pittsburgh Steelers", "Tennessee Titans"
+    }
+
+    #define the NFC teams
+    nfc_teams = {
+        "Arizona Cardinals", "Atlanta Falcons", "Carolina Panthers", "Chicago Bears",
+        "Dallas Cowboys", "Detroit Lions", "Green Bay Packers", "Los Angeles Rams",
+        "Minnesota Vikings", "New Orleans Saints", "New York Giants", "Philadelphia Eagles",
+        "San Francisco 49ers", "Seattle Seahawks", "Tampa Bay Buccaneers", "Washington Commanders"
+    }
+
+    #separate teams into AFC and NFC
+    afc_records = [team for team in teams.values() if team.name in afc_teams]
+    nfc_records = [team for team in teams.values() if team.name in nfc_teams]
+
+    #sort each group by wins in descending order
+    afc_records = sorted(afc_records, key=lambda team: team.current_wins, reverse=True)
+    nfc_records = sorted(nfc_records, key=lambda team: team.current_wins, reverse=True)
+    
+    #print AFC records
+    print("AFC Teams:")
+    for team in afc_records:
         print(f"{team.name} - Wins: {team.current_wins}, Losses: {team.current_losses}, Ties: {team.current_ties}")
+    print("")
+
+    #print NFC records
+    print("NFC Teams:")
+    for team in nfc_records:
+        print(f"{team.name} - Wins: {team.current_wins}, Losses: {team.current_losses}, Ties: {team.current_ties}")
+    print("")
+
+
+    #for team_name, team in teams.items():
+    #    print(f"{team.name} - Wins: {team.current_wins}, Losses: {team.current_losses}, Ties: {team.current_ties}")
+
+
 
 def print_expected_records(teams):
     """
@@ -200,8 +240,15 @@ def print_expected_records(teams):
 
     teams: dict containing Team instances
     """
-    for team_name, team in teams.items():
+    #sort teams in descending order using the key value team.x_wins
+    sorted_teams = sorted(teams.values(), key=lambda team: team.x_wins, reverse=True)
+
+    #print out the expected wins and losses
+    for team in sorted_teams:
         print(f"{team.name} - Expected Wins: {round(team.x_wins, 2)}, Expected Losses: {round(team.x_losses, 2)}")
+    
+    #for team_name, team in teams.items():
+    #    print(f"{team.name} - Expected Wins: {round(team.x_wins, 2)}, Expected Losses: {round(team.x_losses, 2)}")
 
 
 if __name__ == "__main__":
@@ -214,14 +261,6 @@ if __name__ == "__main__":
     print('Would you like to do the season simulation,\nor would you like to find the expected records of each team,\nor would you like to view individual team stats?\n\nFor the simulation, type "simulation",\nand to find the expected records, type "expect",\nand to view team stats, type "stats".')
     choice = input()
     
-    if choice.casefold() == "stats":
-        #create the teams
-        teams = create_teams(offense_file, defense_file)
-        
-        #print individual team stats
-        for team_name, team in teams.items():
-            print(team)
-            print("")
     
     if choice.casefold() == "simulation":
     
@@ -237,7 +276,8 @@ if __name__ == "__main__":
             print(result)
 
         #print final team records
-        print("\nFinal Regular Season Team Records:")
+        print("----------------------------------------------------------")
+        print("\nFinal Regular Season Team Records:\n")
         print_team_records(teams)
         print("\n")
         
@@ -250,5 +290,15 @@ if __name__ == "__main__":
         #print final team records
         print("\nFinal Team Records:")
         print_expected_records(teams)
+        
+        
+    if choice.casefold() == "stats":
+        #create the teams
+        teams = create_teams(offense_file, defense_file)
+        
+        #print individual team stats
+        for team_name, team in teams.items():
+            print(team)
+            print("")
 
 
