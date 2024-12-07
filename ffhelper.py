@@ -62,6 +62,9 @@ class Team:
         elif result == "tie":
             self.current_ties += 1
             
+            
+
+            
 def create_teams(offense_file, defense_file):
     """
     Create a dictionary of teams using offense and defense data from CSV files

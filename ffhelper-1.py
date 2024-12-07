@@ -1,6 +1,7 @@
 import pandas as pd
 import math
 import requests
+import sqlite3
 
 class Team:
     def __init__(self, name, offense_stats, defense_stats):
