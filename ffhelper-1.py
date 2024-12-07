@@ -1,5 +1,6 @@
 import pandas as pd
 import math
+import requests
 
 class Team:
     def __init__(self, name, offense_stats, defense_stats):
@@ -87,6 +88,7 @@ class Team:
             self.current_losses += 1
         elif result == "tie":
             self.current_ties += 1
+            
 
 def create_teams(offense_file, defense_file):
     """
@@ -116,6 +118,10 @@ def create_teams(offense_file, defense_file):
         teams[team_name] = Team(team_name, offense_stats, defense_row)
 
     return teams
+
+
+
+
 
 
 
