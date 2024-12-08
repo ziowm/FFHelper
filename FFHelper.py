@@ -187,7 +187,7 @@ def simulate_season(schedule_file, teams):
 
 def print_team_records(teams):
     """
-    Print the final records of all teams.
+    Print the final records of all teams in descending order.
 
     teams: dict containing Team instances
     """
@@ -252,53 +252,55 @@ def print_expected_records(teams):
 
 
 if __name__ == "__main__":
-    # Files to be used
+    #files to be used
     offense_file = "2023 Fantasy Offense Stats.csv"
     defense_file = "2023 Fantasy Defense Stats.csv"
     schedule_file = "2023 Schedule.csv"
+    
+    #create the teams
+    teams = create_teams(offense_file, defense_file)
 
-    # Gives user option for method of calculating team records
-    print('Would you like to do the season simulation,\nor would you like to find the expected records of each team,\nor would you like to view individual team stats?\n\nFor the simulation, type "simulation",\nand to find the expected records, type "expect",\nand to view team stats, type "stats".')
+    #gives user option for method of calculating team records
+    print('Would you like to do the season simulation,\nor would you like to find the expected records of each team,\nor would you like to view individual team stats?\n\nFor the simulation, type "simulation",\nand to find the expected records, type "expect",\nand to view team stats, type "stats".\n\nIf you want to quit type "quit".')
     choice = input()
     
-    
-    if choice.casefold() == "simulation":
-    
-        #create the teams
-        teams = create_teams(offense_file, defense_file)
+    #while loop to keep running the program until the user decides to quit
+    while choice != "quit":
+        #if the user wants to run a simulation
+        if choice.casefold() == "simulation":
 
-        #simulate the season
-        season_results = simulate_season(schedule_file, teams)
-        
-        #print the results of each matchup
-        print("\nGame Results:")
-        for result in season_results:
-            print(result)
+            #simulate the season
+            season_results = simulate_season(schedule_file, teams)
+                
+            #print the results of each matchup
+            print("\nGame Results:")
+            for result in season_results:
+                print(result)
 
-        #print final team records
-        print("----------------------------------------------------------")
-        print("\nFinal Regular Season Team Records:\n")
-        print_team_records(teams)
-        print("\n")
+            #print final team records
+            print("----------------------------------------------------------")
+            print("\nFinal Regular Season Team Records:\n")
+            print_team_records(teams)
+            #print("\n")
+                
+        #if the user wants to see expected wins based off original mathematical formulas
+        elif choice.casefold() == "expect":
+                
+            #print final team records
+            print("\nFinal Team Records:")
+            print_expected_records(teams)
+                
+        #if the user wants to see individual stats for every team
+        elif choice.casefold() == "stats":
+                
+            #print individual team stats
+            for team_name, team in teams.items():
+                print(team)
+                print("")
+                
+        else:
+            print("\nInvalid choice. Please type 'simulation' for the season simulation,\n'expect' for the expected wins, 'stats' for the team stats, or 'quit'.\n")
         
-    
-    if choice.casefold() == "expect":
-
-        #create the teams
-        teams = create_teams(offense_file, defense_file)
-        
-        #print final team records
-        print("\nFinal Team Records:")
-        print_expected_records(teams)
-        
-        
-    if choice.casefold() == "stats":
-        #create the teams
-        teams = create_teams(offense_file, defense_file)
-        
-        #print individual team stats
-        for team_name, team in teams.items():
-            print(team)
-            print("")
+        choice = input("\nWhat would you like to do next? (simulation / expect / stats / quit): ")
 
 
