@@ -8,6 +8,7 @@ class Team:
         """
         Initialize a team instance.
 
+        args:
         name: Name of the team.
         offense_stats: A dictionary containing the team's offensive production
         defense_stats: A dictionary containing the team's defensive production
@@ -44,6 +45,9 @@ class Team:
     def calculate_expected_wins(self):
         """
         Calculate the expected wins for each team based on offensive and defensive production
+        
+        args:
+        self
         """
         # Calculate Expected Points on offense per game
         self.x_off = 0.19 * (self.off) + 12
@@ -59,18 +63,36 @@ class Team:
     def expected_points_for(self):
         """
         Calculate the expected points scored by the team based on their offensive production
+        
+        args:
+        self
+        
+        return:
+        calculated value
         """
         return self.points_per_game * self.team_efficiency
         
     def calculate_net_production(self):
         """
         Calculate the team's net production using an original formula
+        
+        args:
+        self
+        
+        return:
+        rounded value
         """
         return round(self.off + self.de * 7.06)
 
     def __repr__(self):
         """
         Return a string representation of the team's data
+        
+        args:
+        self
+        
+        return:
+        fstring of stats
         """
         return (f"Team: {self.name}, Games Played: {self.games_played}\n"
                 f"Offense - Points Per Game: {self.points_per_game}, Total Offensive Production: {self.off}, Plays Per Game: {self.plays_per_game}, Team Efficiency: {round(self.team_efficiency, 3)}\n"
@@ -82,6 +104,10 @@ class Team:
     def update_record(self, result):
         """
         Update the team's record based on a game result
+        
+        args:
+        self
+        result
         """
         if result == "win":
             self.current_wins += 1
@@ -192,7 +218,7 @@ def print_team_records(teams):
     teams: dict containing Team instances
     """
 
-    #define the AFC teams
+    #define the AFC teams in a set
     afc_teams = {
         "Baltimore Ravens", "Buffalo Bills", "Cincinnati Bengals", "Cleveland Browns", 
         "Denver Broncos", "Houston Texans", "Indianapolis Colts", "Jacksonville Jaguars", 
@@ -200,7 +226,7 @@ def print_team_records(teams):
         "New England Patriots", "New York Jets", "Pittsburgh Steelers", "Tennessee Titans"
     }
 
-    #define the NFC teams
+    #define the NFC teams in a set
     nfc_teams = {
         "Arizona Cardinals", "Atlanta Falcons", "Carolina Panthers", "Chicago Bears",
         "Dallas Cowboys", "Detroit Lions", "Green Bay Packers", "Los Angeles Rams",
@@ -260,7 +286,7 @@ if __name__ == "__main__":
     #create the teams
     teams = create_teams(offense_file, defense_file)
 
-    #gives user option for method of calculating team records
+    #gives user option for method of simulating, stats, or expected wins/losses
     print('Would you like to do the season simulation,\nor would you like to find the expected records of each team,\nor would you like to view individual team stats?\n\nFor the simulation, type "simulation",\nand to find the expected records, type "expect",\nand to view team stats, type "stats".\n\nIf you want to quit type "quit".')
     choice = input()
     
