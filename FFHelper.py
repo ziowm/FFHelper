@@ -1,5 +1,9 @@
 import pandas as pd
 import math
+import re
+import argparse
+import sys
+import os
 
 class Team:
     def __init__(self, name, offense_stats, defense_stats):
@@ -32,10 +36,11 @@ class Team:
         self.x_wins = 0
         self.x_losses = 0
 
-        #wins losses ties
+        #wins losses ties and win streak
         self.current_wins = 0
         self.current_losses = 0
         self.current_ties = 0
+        self.win_streak = 0
         
         # call expected wins method
         self.calculate_expected_wins()
@@ -109,10 +114,13 @@ class Team:
         """
         if result == "win":
             self.current_wins += 1
+            self.win_streak += 1  #increase win streak
         elif result == "loss":
             self.current_losses += 1
+            self.win_streak = 0  #reset win streak
         elif result == "tie":
             self.current_ties += 1
+            self.win_streak = 0  #reset win streak
             
 
 def create_teams(offense_file, defense_file):
@@ -158,6 +166,13 @@ def simulate_game(team1, team2):
     # use team efficiency and net production to determine the winner
     team1_score = team1.team_efficiency + (team1.calculate_net_production() - team2.offensive_production_allowed)
     team2_score = team2.team_efficiency + (team2.calculate_net_production() - team1.offensive_production_allowed)
+    
+    #home team advantage gets their score multiplied by 1.05
+    team2_score *= 1.05
+    
+    #win streak multiplier: 2% increate per game in the current win streak
+    team1_score *= 1 + (0.02 * team1.win_streak)
+    team2_score *= 1 + (0.02 * team2.win_streak)
 
     if team1_score > team2_score:
         return team1, team2, "win1"
