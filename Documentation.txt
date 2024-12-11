@@ -1,0 +1,10 @@
+Project Explanation:
+This project predicts NFL team records using data from Fantasy Football. The project first reads three CSV files in order to pull
+the offensive stats, defensive stats, and league schedule. Then the program creates a Team object, to represent a team in the league,
+then calculates individual attributes with original formulas using the data from the CSV files. The program allows the user to choose
+between three choices, a full season simulation, expected wins/losses, and individual team stats.
+
+How to run the code:
+1. Make sure the 3 CSV files and Python Script are in the same directory
+2. Run from the terminal: python FFHelper.py
+
