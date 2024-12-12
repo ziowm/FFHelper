@@ -1,9 +1,6 @@
 import pandas as pd
 import math
-import re
-import argparse
-import sys
-import os
+import random
 
 class Team:
     def __init__(self, name, offense_stats, defense_stats):
@@ -122,6 +119,28 @@ class Team:
             self.current_ties += 1
             self.win_streak = 0  #reset win streak
             
+            
+    def reset_record(self):
+        """
+        Reset the team record to 0 after a simulation
+        
+        args: self
+        """
+        self.current_wins = 0
+        self.current_losses = 0
+        self.current_ties = 0
+        self.win_streak = 0
+
+
+def reset_all_teams(teams):
+    """
+    Reset every teams record
+
+    args:
+    teams dictionary indexed by team names
+    """
+    for team in teams.values():
+        team.reset_record()
 
 def create_teams(offense_file, defense_file):
     """
@@ -153,6 +172,85 @@ def create_teams(offense_file, defense_file):
     return teams
 
 
+def get_weather(home_team):
+    """
+    Get the weather conditions for a game, depending on the home team
+
+    args:
+    home_team: The name of the home team (Team2 in schedule file).
+
+    return:
+    The weather condition as a string.
+    """
+    
+    #weather probabilities for each home team, there are 10 teams with indoor closed statiums so they are always clear
+    stadium_weather = {
+    "Arizona Cardinals": {"Clear": 1.0, "Rain": 0.0, "Snow": 0.0, "Windy": 0.0},
+    "Atlanta Falcons": {"Clear": 1.0, "Rain": 0.0, "Snow": 0.0, "Windy": 0.0},
+    "Baltimore Ravens": {"Clear": 0.7, "Rain": 0.2, "Snow": 0.05, "Windy": 0.05},
+    "Buffalo Bills": {"Clear": 0.5, "Rain": 0.2, "Snow": 0.2, "Windy": 0.1},
+    "Carolina Panthers": {"Clear": 0.75, "Rain": 0.2, "Snow": 0.05, "Windy": 0.0},
+    "Chicago Bears": {"Clear": 0.6, "Rain": 0.2, "Snow": 0.15, "Windy": 0.05},
+    "Cincinnati Bengals": {"Clear": 0.65, "Rain": 0.25, "Snow": 0.05, "Windy": 0.05},
+    "Cleveland Browns": {"Clear": 0.55, "Rain": 0.25, "Snow": 0.15, "Windy": 0.05},
+    "Dallas Cowboys": {"Clear": 1.0, "Rain": 0.0, "Snow": 0.0, "Windy": 0.0},
+    "Denver Broncos": {"Clear": 0.8, "Rain": 0.1, "Snow": 0.05, "Windy": 0.05},
+    "Detroit Lions": {"Clear": 1.0, "Rain": 0.0, "Snow": 0.0, "Windy": 0.0},
+    "Green Bay Packers": {"Clear": 0.5, "Rain": 0.1, "Snow": 0.35, "Windy": 0.05},
+    "Houston Texans": {"Clear": 1.0, "Rain": 0.0, "Snow": 0.0, "Windy": 0.0},
+    "Indianapolis Colts": {"Clear": 1.0, "Rain": 0.0, "Snow": 0.0, "Windy": 0.0},
+    "Jacksonville Jaguars": {"Clear": 0.8, "Rain": 0.2, "Snow": 0.0, "Windy": 0.0},
+    "Kansas City Chiefs": {"Clear": 0.7, "Rain": 0.2, "Snow": 0.05, "Windy": 0.05},
+    "Las Vegas Raiders": {"Clear": 1.0, "Rain": 0.0, "Snow": 0.0, "Windy": 0.0},
+    "Los Angeles Chargers": {"Clear": 1.0, "Rain": 0.0, "Snow": 0.0, "Windy": 0.0},
+    "Los Angeles Rams": {"Clear": 1.0, "Rain": 0.0, "Snow": 0.0, "Windy": 0.0},
+    "Miami Dolphins": {"Clear": 0.75, "Rain": 0.25, "Snow": 0.0, "Windy": 0.0},
+    "Minnesota Vikings": {"Clear": 1.0, "Rain": 0.0, "Snow": 0.0, "Windy": 0.0},
+    "New England Patriots": {"Clear": 0.65, "Rain": 0.2, "Snow": 0.1, "Windy": 0.05},
+    "New Orleans Saints": {"Clear": 1.0, "Rain": 0.0, "Snow": 0.0, "Windy": 0.0},
+    "New York Giants": {"Clear": 0.65, "Rain": 0.2, "Snow": 0.1, "Windy": 0.05},
+    "New York Jets": {"Clear": 0.65, "Rain": 0.2, "Snow": 0.1, "Windy": 0.05},
+    "Philadelphia Eagles": {"Clear": 0.7, "Rain": 0.2, "Snow": 0.05, "Windy": 0.05},
+    "Pittsburgh Steelers": {"Clear": 0.6, "Rain": 0.2, "Snow": 0.15, "Windy": 0.05},
+    "San Francisco 49ers": {"Clear": 0.85, "Rain": 0.15, "Snow": 0.0, "Windy": 0.0},
+    "Seattle Seahawks": {"Clear": 0.6, "Rain": 0.3, "Snow": 0.05, "Windy": 0.05},
+    "Tampa Bay Buccaneers": {"Clear": 0.8, "Rain": 0.2, "Snow": 0.0, "Windy": 0.0},
+    "Tennessee Titans": {"Clear": 0.75, "Rain": 0.2, "Snow": 0.05, "Windy": 0.0},
+    "Washington Commanders": {"Clear": 0.7, "Rain": 0.2, "Snow": 0.05, "Windy": 0.05},
+    }
+    
+    
+    #get weather probabilities for the home team
+    weather_probs = stadium_weather.get(home_team, {"Clear": 1.0})
+    return random.choices(list(weather_probs.keys()), weights=list(weather_probs.values()))[0]
+
+
+def apply_weather_effects(weather, team):
+    """
+    Adjust team stats based on the weather condition.
+    
+    args:
+    weather: current weather
+    team: team with adjusted stats based on weather
+    
+    return:
+    team efficiency, net production as a tuple
+    """
+    if weather == "Clear":
+        efficiency = team.team_efficiency
+        net_production = team.calculate_net_production()
+    elif weather == "Rain":
+        efficiency = team.team_efficiency * 0.9 #worse passing
+        net_production = team.calculate_net_production() * 1.1 #better rushing
+    elif weather == "Snow":
+        efficiency = team.team_efficiency * 0.8 #worse offense entirely
+        net_production = team.calculate_net_production() * 1.2 #boost defense entirely
+    elif weather == "Windy":
+        efficiency = team.team_efficiency * 0.85 #worse passing
+        net_production = team.calculate_net_production() * 1.15 #better defense
+    
+    return efficiency, net_production
+
 
 def simulate_game(team1, team2):
     """
@@ -161,9 +259,18 @@ def simulate_game(team1, team2):
     team1: The first team instance
     team2: The second team instance
     
-    return winner (Team object), loser (Team object), and outcome ('win1'/'win2'/'tie').
+    returns
+    winner: Team object
+    loser: Team object
+    outcome: 'win1'/'win2'/'tie'
     """
-    # use team efficiency and net production to determine the winner
+    
+    #get weather for a game and apply weather effects
+    weather = get_weather(team2.name)
+    team1_efficiency, team1_net = apply_weather_effects(weather, team1)
+    team2_efficiency, team2_net = apply_weather_effects(weather, team2)
+    
+    #use team efficiency and net production to determine the winner
     team1_score = team1.team_efficiency + (team1.calculate_net_production() - team2.offensive_production_allowed)
     team2_score = team2.team_efficiency + (team2.calculate_net_production() - team1.offensive_production_allowed)
     
@@ -174,6 +281,7 @@ def simulate_game(team1, team2):
     team1_score *= 1 + (0.02 * team1.win_streak)
     team2_score *= 1 + (0.02 * team2.win_streak)
 
+    #determine winner
     if team1_score > team2_score:
         return team1, team2, "win1"
     elif team2_score > team1_score:
@@ -264,11 +372,6 @@ def print_team_records(teams):
     print("")
 
 
-    #for team_name, team in teams.items():
-    #    print(f"{team.name} - Wins: {team.current_wins}, Losses: {team.current_losses}, Ties: {team.current_ties}")
-
-
-
 def print_expected_records(teams):
     """
     Print the final records of all teams, using the LSRL expected wins formula. 
@@ -281,9 +384,6 @@ def print_expected_records(teams):
     #print out the expected wins and losses
     for team in sorted_teams:
         print(f"{team.name} - Expected Wins: {round(team.x_wins, 2)}, Expected Losses: {round(team.x_losses, 2)}")
-    
-    #for team_name, team in teams.items():
-    #    print(f"{team.name} - Expected Wins: {round(team.x_wins, 2)}, Expected Losses: {round(team.x_losses, 2)}")
 
 
 if __name__ == "__main__":
@@ -303,6 +403,8 @@ if __name__ == "__main__":
     while choice != "quit":
         #if the user wants to run a simulation
         if choice.casefold() == "simulation":
+            #reset results
+            reset_all_teams(teams)
 
             #simulate the season
             season_results = simulate_season(schedule_file, teams)
@@ -337,5 +439,4 @@ if __name__ == "__main__":
             print("\nInvalid choice. Please type 'simulation' for the season simulation,\n'expect' for the expected wins, 'stats' for the team stats, or 'quit'.\n")
         
         choice = input("\nWhat would you like to do next? (simulation / expect / stats / quit): ")
-
 
