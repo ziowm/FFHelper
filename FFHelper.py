@@ -1,10 +1,18 @@
+#import pandas to read csv files, math to perform calculations and round, random to randomize weather
 import pandas as pd
 import math
 import random
 
 class Team:
+    """
+    This class creates an individual team object
+    """
+    
     def __init__(self, name, offense_stats, defense_stats):
         """
+        Driver: Moiz Uddin
+        Navigator: Justin Blattman
+        
         Initialize a team instance.
 
         args:
@@ -42,8 +50,12 @@ class Team:
         # call expected wins method
         self.calculate_expected_wins()
     
+    
     def calculate_expected_wins(self):
         """
+        Driver: Justin Blattman
+        Navigator: Moiz Uddin
+        
         Calculate the expected wins for each team based on offensive and defensive production
         
         args:
@@ -60,8 +72,12 @@ class Team:
         # Calculate expected losses
         self.x_losses = 17 - self.x_wins
         
+        
     def expected_points_for(self):
         """
+        Driver: Justin Blattman
+        Navigator: Moiz Uddin
+        
         Calculate the expected points scored by the team based on their offensive production
         
         args:
@@ -71,9 +87,13 @@ class Team:
         calculated value
         """
         return self.points_per_game * self.team_efficiency
+     
         
     def calculate_net_production(self):
         """
+        Driver: Justin Blattman
+        Navigator: Moiz Uddin
+        
         Calculate the team's net production using an original formula
         
         args:
@@ -84,8 +104,12 @@ class Team:
         """
         return round(self.off + self.de * 7.06)
 
+
     def __repr__(self):
         """
+        Driver: Moiz Uddin
+        Navigator: Justin Blattman
+        
         Return a string representation of the team's data
         
         args:
@@ -101,8 +125,12 @@ class Team:
                 f"Defense - Expected Points Allowed Per Game: {round(self.x_def, 2)}\n"
                 f"Net Production: {self.calculate_net_production()}, Expected Net Rating: {round(self.net, 2)}")
         
+        
     def update_record(self, result):
         """
+        Driver: Moiz Uddin
+        Navigator: Justin Blattman
+        
         Update the team's record based on a game result
         
         args:
@@ -122,6 +150,9 @@ class Team:
             
     def reset_record(self):
         """
+        Driver: Moiz Uddin
+        Navigator: Justin Blattman
+        
         Reset the team record to 0 after a simulation
         
         args: self
@@ -132,8 +163,12 @@ class Team:
         self.win_streak = 0
 
 
+
 def reset_all_teams(teams):
     """
+    Driver: Moiz Uddin
+    Navigator: Justin Blattman
+    
     Reset every teams record
 
     args:
@@ -142,8 +177,13 @@ def reset_all_teams(teams):
     for team in teams.values():
         team.reset_record()
 
+
+
 def create_teams(offense_file, defense_file):
     """
+    Driver: Justin Blattman
+    Navigator: Moiz Uddin
+    
     Create a dictionary of teams using offense and defense data from CSV files
 
     offense_file: Path to the Fantasy Offense Stats CSV file
@@ -172,8 +212,12 @@ def create_teams(offense_file, defense_file):
     return teams
 
 
+
 def get_weather(home_team):
     """
+    Driver: Moiz Uddin
+    Navigator: Justin Blattman    
+    
     Get the weather conditions for a game, depending on the home team
 
     args:
@@ -225,8 +269,13 @@ def get_weather(home_team):
     return random.choices(list(weather_probs.keys()), weights=list(weather_probs.values()))[0]
 
 
+
 def apply_weather_effects(weather, team):
     """
+    Driver: Moiz Uddin
+    Navigator: Justin Blattman
+    
+    
     Adjust team stats based on the weather condition.
     
     args:
@@ -252,8 +301,12 @@ def apply_weather_effects(weather, team):
     return efficiency, net_production
 
 
+
 def simulate_game(team1, team2):
     """
+    Driver: Justin Blattman
+    Navigator: Moiz Uddin
+    
     Simulate a game between two teams and determine the winner
 
     team1: The first team instance
@@ -288,9 +341,14 @@ def simulate_game(team1, team2):
         return team2, team1, "win2"
     else:
         return None, None, "tie"
+   
+   
     
 def simulate_season(schedule_file, teams):
     """
+    Driver: Moiz Uddin
+    Navigator: Justin Blattman
+    
     Simulate an NFL season based on the schedule csv and update team records
 
     schedule_file: path to the schedule CSV file.
@@ -328,8 +386,12 @@ def simulate_season(schedule_file, teams):
     return results
 
 
+
 def print_team_records(teams):
     """
+    Driver: Moiz Uddin
+    Navigator: Justin Blattman
+    
     Print the final records of all teams in descending order.
 
     teams: dict containing Team instances
@@ -372,8 +434,12 @@ def print_team_records(teams):
     print("")
 
 
+
 def print_expected_records(teams):
     """
+    Driver: Justin Blattman
+    Navigator: Moiz Uddin
+    
     Print the final records of all teams, using the LSRL expected wins formula. 
 
     teams: dict containing Team instances
@@ -386,7 +452,14 @@ def print_expected_records(teams):
         print(f"{team.name} - Expected Wins: {round(team.x_wins, 2)}, Expected Losses: {round(team.x_losses, 2)}")
 
 
+
 if __name__ == "__main__":
+    """
+    Driver: Justin Blattmann
+    Navigator: Moiz Uddin
+    
+    Reads the CSV files, creates a team object and gets user input to run different aspects of the code
+    """
     #files to be used
     offense_file = "2023 Fantasy Offense Stats.csv"
     defense_file = "2023 Fantasy Defense Stats.csv"
@@ -439,4 +512,3 @@ if __name__ == "__main__":
             print("\nInvalid choice. Please type 'simulation' for the season simulation,\n'expect' for the expected wins, 'stats' for the team stats, or 'quit'.\n")
         
         choice = input("\nWhat would you like to do next? (simulation / expect / stats / quit): ")
-

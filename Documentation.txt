@@ -8,3 +8,7 @@ How to run the code:
 1. Make sure the 3 CSV files and Python Script are in the same directory
 2. Run from the terminal: python FFHelper.py
 
+How to use/interpret the program:
+
+
+Bibliography:
