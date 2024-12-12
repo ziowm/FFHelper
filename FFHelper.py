@@ -185,43 +185,43 @@ def get_weather(home_team):
     
     #weather probabilities for each home team, there are 10 teams with indoor closed statiums so they are always clear
     stadium_weather = {
-    "Arizona Cardinals": {"Clear": 1.0, "Rain": 0.0, "Snow": 0.0, "Windy": 0.0},
-    "Atlanta Falcons": {"Clear": 1.0, "Rain": 0.0, "Snow": 0.0, "Windy": 0.0},
-    "Baltimore Ravens": {"Clear": 0.7, "Rain": 0.2, "Snow": 0.05, "Windy": 0.05},
-    "Buffalo Bills": {"Clear": 0.5, "Rain": 0.2, "Snow": 0.2, "Windy": 0.1},
-    "Carolina Panthers": {"Clear": 0.75, "Rain": 0.2, "Snow": 0.05, "Windy": 0.0},
-    "Chicago Bears": {"Clear": 0.6, "Rain": 0.2, "Snow": 0.15, "Windy": 0.05},
-    "Cincinnati Bengals": {"Clear": 0.65, "Rain": 0.25, "Snow": 0.05, "Windy": 0.05},
-    "Cleveland Browns": {"Clear": 0.55, "Rain": 0.25, "Snow": 0.15, "Windy": 0.05},
-    "Dallas Cowboys": {"Clear": 1.0, "Rain": 0.0, "Snow": 0.0, "Windy": 0.0},
-    "Denver Broncos": {"Clear": 0.8, "Rain": 0.1, "Snow": 0.05, "Windy": 0.05},
-    "Detroit Lions": {"Clear": 1.0, "Rain": 0.0, "Snow": 0.0, "Windy": 0.0},
-    "Green Bay Packers": {"Clear": 0.5, "Rain": 0.1, "Snow": 0.35, "Windy": 0.05},
-    "Houston Texans": {"Clear": 1.0, "Rain": 0.0, "Snow": 0.0, "Windy": 0.0},
-    "Indianapolis Colts": {"Clear": 1.0, "Rain": 0.0, "Snow": 0.0, "Windy": 0.0},
-    "Jacksonville Jaguars": {"Clear": 0.8, "Rain": 0.2, "Snow": 0.0, "Windy": 0.0},
-    "Kansas City Chiefs": {"Clear": 0.7, "Rain": 0.2, "Snow": 0.05, "Windy": 0.05},
-    "Las Vegas Raiders": {"Clear": 1.0, "Rain": 0.0, "Snow": 0.0, "Windy": 0.0},
-    "Los Angeles Chargers": {"Clear": 1.0, "Rain": 0.0, "Snow": 0.0, "Windy": 0.0},
-    "Los Angeles Rams": {"Clear": 1.0, "Rain": 0.0, "Snow": 0.0, "Windy": 0.0},
-    "Miami Dolphins": {"Clear": 0.75, "Rain": 0.25, "Snow": 0.0, "Windy": 0.0},
-    "Minnesota Vikings": {"Clear": 1.0, "Rain": 0.0, "Snow": 0.0, "Windy": 0.0},
-    "New England Patriots": {"Clear": 0.65, "Rain": 0.2, "Snow": 0.1, "Windy": 0.05},
-    "New Orleans Saints": {"Clear": 1.0, "Rain": 0.0, "Snow": 0.0, "Windy": 0.0},
-    "New York Giants": {"Clear": 0.65, "Rain": 0.2, "Snow": 0.1, "Windy": 0.05},
-    "New York Jets": {"Clear": 0.65, "Rain": 0.2, "Snow": 0.1, "Windy": 0.05},
-    "Philadelphia Eagles": {"Clear": 0.7, "Rain": 0.2, "Snow": 0.05, "Windy": 0.05},
-    "Pittsburgh Steelers": {"Clear": 0.6, "Rain": 0.2, "Snow": 0.15, "Windy": 0.05},
-    "San Francisco 49ers": {"Clear": 0.85, "Rain": 0.15, "Snow": 0.0, "Windy": 0.0},
-    "Seattle Seahawks": {"Clear": 0.6, "Rain": 0.3, "Snow": 0.05, "Windy": 0.05},
-    "Tampa Bay Buccaneers": {"Clear": 0.8, "Rain": 0.2, "Snow": 0.0, "Windy": 0.0},
-    "Tennessee Titans": {"Clear": 0.75, "Rain": 0.2, "Snow": 0.05, "Windy": 0.0},
-    "Washington Commanders": {"Clear": 0.7, "Rain": 0.2, "Snow": 0.05, "Windy": 0.05},
+    "Arizona Cardinals": {"Clear": 1.0, "Rain": 0.0, "Snow": 0.0, "Wind": 0.0},
+    "Atlanta Falcons": {"Clear": 1.0, "Rain": 0.0, "Snow": 0.0, "Wind": 0.0},
+    "Baltimore Ravens": {"Clear": 0.7, "Rain": 0.2, "Snow": 0.05, "Wind": 0.05},
+    "Buffalo Bills": {"Clear": 0.5, "Rain": 0.2, "Snow": 0.2, "Wind": 0.1},
+    "Carolina Panthers": {"Clear": 0.75, "Rain": 0.2, "Snow": 0.05, "Wind": 0.0},
+    "Chicago Bears": {"Clear": 0.6, "Rain": 0.2, "Snow": 0.15, "Wind": 0.05},
+    "Cincinnati Bengals": {"Clear": 0.65, "Rain": 0.25, "Snow": 0.05, "Wind": 0.05},
+    "Cleveland Browns": {"Clear": 0.55, "Rain": 0.25, "Snow": 0.15, "Wind": 0.05},
+    "Dallas Cowboys": {"Clear": 1.0, "Rain": 0.0, "Snow": 0.0, "Wind": 0.0},
+    "Denver Broncos": {"Clear": 0.8, "Rain": 0.1, "Snow": 0.05, "Wind": 0.05},
+    "Detroit Lions": {"Clear": 1.0, "Rain": 0.0, "Snow": 0.0, "Wind": 0.0},
+    "Green Bay Packers": {"Clear": 0.5, "Rain": 0.1, "Snow": 0.35, "Wind": 0.05},
+    "Houston Texans": {"Clear": 1.0, "Rain": 0.0, "Snow": 0.0, "Wind": 0.0},
+    "Indianapolis Colts": {"Clear": 1.0, "Rain": 0.0, "Snow": 0.0, "Wind": 0.0},
+    "Jacksonville Jaguars": {"Clear": 0.8, "Rain": 0.2, "Snow": 0.0, "Wind": 0.0},
+    "Kansas City Chiefs": {"Clear": 0.7, "Rain": 0.2, "Snow": 0.05, "Wind": 0.05},
+    "Las Vegas Raiders": {"Clear": 1.0, "Rain": 0.0, "Snow": 0.0, "Wind": 0.0},
+    "Los Angeles Chargers": {"Clear": 1.0, "Rain": 0.0, "Snow": 0.0, "Wind": 0.0},
+    "Los Angeles Rams": {"Clear": 1.0, "Rain": 0.0, "Snow": 0.0, "Wind": 0.0},
+    "Miami Dolphins": {"Clear": 0.75, "Rain": 0.25, "Snow": 0.0, "Wind": 0.0},
+    "Minnesota Vikings": {"Clear": 1.0, "Rain": 0.0, "Snow": 0.0, "Wind": 0.0},
+    "New England Patriots": {"Clear": 0.65, "Rain": 0.2, "Snow": 0.1, "Wind": 0.05},
+    "New Orleans Saints": {"Clear": 1.0, "Rain": 0.0, "Snow": 0.0, "Wind": 0.0},
+    "New York Giants": {"Clear": 0.65, "Rain": 0.2, "Snow": 0.1, "Wind": 0.05},
+    "New York Jets": {"Clear": 0.65, "Rain": 0.2, "Snow": 0.1, "Wind": 0.05},
+    "Philadelphia Eagles": {"Clear": 0.7, "Rain": 0.2, "Snow": 0.05, "Wind": 0.05},
+    "Pittsburgh Steelers": {"Clear": 0.6, "Rain": 0.2, "Snow": 0.15, "Wind": 0.05},
+    "San Francisco 49ers": {"Clear": 0.85, "Rain": 0.15, "Snow": 0.0, "Wind": 0.0},
+    "Seattle Seahawks": {"Clear": 0.6, "Rain": 0.3, "Snow": 0.05, "Wind": 0.05},
+    "Tampa Bay Buccaneers": {"Clear": 0.8, "Rain": 0.2, "Snow": 0.0, "Wind": 0.0},
+    "Tennessee Titans": {"Clear": 0.75, "Rain": 0.2, "Snow": 0.05, "Wind": 0.0},
+    "Washington Commanders": {"Clear": 0.7, "Rain": 0.2, "Snow": 0.05, "Wind": 0.05},
     }
     
     
     #get weather probabilities for the home team
-    weather_probs = stadium_weather.get(home_team, {"Clear": 1.0})
+    weather_probs = stadium_weather.get(home_team, {"Clear": 1.0}) #default is clear weather
     return random.choices(list(weather_probs.keys()), weights=list(weather_probs.values()))[0]
 
 
@@ -245,7 +245,7 @@ def apply_weather_effects(weather, team):
     elif weather == "Snow":
         efficiency = team.team_efficiency * 0.8 #worse offense entirely
         net_production = team.calculate_net_production() * 1.2 #boost defense entirely
-    elif weather == "Windy":
+    elif weather == "Wind":
         efficiency = team.team_efficiency * 0.85 #worse passing
         net_production = team.calculate_net_production() * 1.15 #better defense
     
