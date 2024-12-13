@@ -20,6 +20,6 @@ they would like the program to do.
 
 Bibliography:
 
-Engaging Media. (2023). 2023 fantasy football team stats. Fantasy Footballers Podcast. https://www.thefantasyfootballers.com/2023-fantasy-football-team-stats/?position=Offense 
+Engaging Media. (2023). 2023 fantasy football team stats. Fantasy Footballers Podcast. https://www.thefantasyfootballers.com/2023-fantasy-football-team-stats/
 Blattman, J., & Uddin, M. (2024, November 20). Fantasy Helper LSRL. Google Sheets. https://docs.google.com/spreadsheets/d/1mgBfMGFgg6H887UYO6M1Eus2RrltYe4STxLmvIST2mM/edit?gid=0#gid=0 
 2023 Schedule File created by Moiz Uddin and Justin Blattman 

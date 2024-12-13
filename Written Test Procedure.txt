@@ -1,0 +1,37 @@
+simulate_season:
+
+Setup: Prepare the schedule file
+Verify that the game simulations printed match the games from the schedule files when simulate_season is called
+First game of the season should be Lions at Chiefs; last game of the season should be Bills at Dolphins
+
+
+print_team_records:
+
+Setup: Prepare team sets and teams to be used for Team class 
+Verify all teams are present and match the CSV files
+Verify team records are sorted by conference and in order from most wins at the top to least wins at the bottom
+Verify team win and loss values match those retrieved from that Team class
+
+print_expected_records:
+
+Setup: Prepare teams to be used for Team class 
+Verify team records are sorted by conference and in order from most wins at the top to least wins at the bottom
+Verify team win and loss values match those retrieved from that Team class
+
+if __name__ == "__main__":
+
+Setup: prepare CSV files
+Very create_teams is called by checking if the program effectively shows the teams
+Verify input for the choice variable matches one of the values that work with the program (simulation, expect, stats, quit). If not, 
+verify the program asks the user the input question again
+Verify reset_all_teams is effectively called when the choice variable is equal to simulation by seeing if the data for the teams reset
+Verify season_results consists of the results returned from the simulate_season method
+Verify the results for each game in the simulation are printed from the for loop
+Verify the records for each team are printed for the simulation 
+Verify the records for each team are printed when choice is equal to expect (Expected Wins Formula)
+Verify each team's stats and attributes are printed when choice is equal to stats. This includes: team name, games played,
+points per game on offense, total offensive production, plays per game, team efficiency, points allowed per game on defense, 
+total defensive production, offensive production allowed to opponents, expected points per game on offense, expected points per 
+game on defense, net production, and expected net rating.
+Verify the user quits the program when choice is equal to quit
+Verify the user input is case insensitive
