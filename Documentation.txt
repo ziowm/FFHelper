@@ -9,6 +9,17 @@ How to run the code:
 2. Run from the terminal: python FFHelper.py
 
 How to use/interpret the program:
+When the program is run, it will give the user three options. The first option is to run the season simulation, using the team scores derived 
+from a team's efficiency, net production and offensive production allowed, in addition to other factors such as weather and win streaks. The simulation 
+will print the results of each game, and print the team records that are derived of each game simulation. The second option is to retrieve the teams' 
+expected records, using the variety of linear regression formulas created. This prints the records of each team using the formulas. The third option is 
+to retrieve the stats for each team, including a variety of offensive stats, defense stats, and a team's net rating and production, as it prints the stats
+to the user. The user can additionally quit the program when they choose, and the program will notify the user if they type in an invalid choice for what
+they would like the program to do.
 
 
 Bibliography:
+
+Engaging Media. (2023). 2023 fantasy football team stats. Fantasy Footballers Podcast. https://www.thefantasyfootballers.com/2023-fantasy-football-team-stats/?position=Offense 
+Blattman, J., & Uddin, M. (2024, November 20). Fantasy Helper LSRL. Google Sheets. https://docs.google.com/spreadsheets/d/1mgBfMGFgg6H887UYO6M1Eus2RrltYe4STxLmvIST2mM/edit?gid=0#gid=0 
+2023 Schedule File created by Moiz Uddin and Justin Blattman 
