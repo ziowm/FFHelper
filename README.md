@@ -1,4 +1,4 @@
-# Justin Blattman NumPy/Pandas Project
+# Justin Blattman and Moiz Uddin - Fantasy Football Team Record Predictor Project
 
 This project predicts the records of NFL Teams using statistics and data from fantasy football. The program 
 reads CSV's containing offensive and defensive stats and a schedule, and creates a Team object that retrieves its stats and calculates the recod of that respective team. The program gives the user options to run a full season simulation, calculate expected records using linear regression formulas, and retrieve a variety of different statistics for each team.
