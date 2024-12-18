@@ -9,10 +9,7 @@ class Team:
     """
     
     def __init__(self, name, offense_stats, defense_stats):
-        """
-        Driver: Moiz Uddin
-        Navigator: Justin Blattman
-        
+        """  
         Initialize a team instance.
 
         args:
@@ -53,9 +50,6 @@ class Team:
     
     def calculate_expected_wins(self):
         """
-        Driver: Justin Blattman
-        Navigator: Moiz Uddin
-        
         Calculate the expected wins for each team based on offensive and defensive production
         
         args:
@@ -75,9 +69,6 @@ class Team:
         
     def expected_points_for(self):
         """
-        Driver: Justin Blattman
-        Navigator: Moiz Uddin
-        
         Calculate the expected points scored by the team based on their offensive production
         
         args:
@@ -91,9 +82,6 @@ class Team:
         
     def calculate_net_production(self):
         """
-        Driver: Justin Blattman
-        Navigator: Moiz Uddin
-        
         Calculate the team's net production using an original formula
         
         args:
@@ -107,9 +95,6 @@ class Team:
 
     def __repr__(self):
         """
-        Driver: Moiz Uddin
-        Navigator: Justin Blattman
-        
         Return a string representation of the team's data
         
         args:
@@ -128,9 +113,6 @@ class Team:
         
     def update_record(self, result):
         """
-        Driver: Moiz Uddin
-        Navigator: Justin Blattman
-        
         Update the team's record based on a game result
         
         args:
@@ -150,9 +132,6 @@ class Team:
             
     def reset_record(self):
         """
-        Driver: Moiz Uddin
-        Navigator: Justin Blattman
-        
         Reset the team record to 0 after a simulation
         
         args: self
@@ -166,9 +145,6 @@ class Team:
 
 def reset_all_teams(teams):
     """
-    Driver: Moiz Uddin
-    Navigator: Justin Blattman
-    
     Reset every teams record
 
     args:
@@ -181,9 +157,6 @@ def reset_all_teams(teams):
 
 def create_teams(offense_file, defense_file):
     """
-    Driver: Justin Blattman
-    Navigator: Moiz Uddin
-    
     Create a dictionary of teams using offense and defense data from CSV files
 
     offense_file: Path to the Fantasy Offense Stats CSV file
@@ -215,9 +188,6 @@ def create_teams(offense_file, defense_file):
 
 def get_weather(home_team):
     """
-    Driver: Moiz Uddin
-    Navigator: Justin Blattman    
-    
     Get the weather conditions for a game, depending on the home team
 
     args:
@@ -272,10 +242,6 @@ def get_weather(home_team):
 
 def apply_weather_effects(weather, team):
     """
-    Driver: Moiz Uddin
-    Navigator: Justin Blattman
-    
-    
     Adjust team stats based on the weather condition.
     
     args:
@@ -304,9 +270,6 @@ def apply_weather_effects(weather, team):
 
 def simulate_game(team1, team2):
     """
-    Driver: Justin Blattman
-    Navigator: Moiz Uddin
-    
     Simulate a game between two teams and determine the winner
 
     team1: The first team instance
@@ -346,9 +309,6 @@ def simulate_game(team1, team2):
     
 def simulate_season(schedule_file, teams):
     """
-    Driver: Moiz Uddin
-    Navigator: Justin Blattman
-    
     Simulate an NFL season based on the schedule csv and update team records
 
     schedule_file: path to the schedule CSV file.
@@ -389,9 +349,6 @@ def simulate_season(schedule_file, teams):
 
 def print_team_records(teams):
     """
-    Driver: Moiz Uddin
-    Navigator: Justin Blattman
-    
     Print the final records of all teams in descending order.
 
     teams: dict containing Team instances
@@ -437,9 +394,6 @@ def print_team_records(teams):
 
 def print_expected_records(teams):
     """
-    Driver: Justin Blattman
-    Navigator: Moiz Uddin
-    
     Print the final records of all teams, using the LSRL expected wins formula. 
 
     teams: dict containing Team instances
@@ -455,9 +409,6 @@ def print_expected_records(teams):
 
 if __name__ == "__main__":
     """
-    Driver: Justin Blattmann
-    Navigator: Moiz Uddin
-    
     Reads the CSV files, creates a team object and gets user input to run different aspects of the code
     """
     #files to be used
